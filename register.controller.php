@@ -2,32 +2,39 @@
 require_once('connection.php');
 
 class Admin extends Database{
-    private $name;
-    private $email;
-    private $password;
-    public function setName($name){
-        $this->name = $name;
-    }
-    public function setEmail($email){
-        $this->email = $email;
-    }
-    public function setPassword($password){
-        $this->password = $password;
-    }
-    public function register(){
-        $stm = $this->con->prepare("INSERT INTO admin (name, email, password) VALUES (?,?,?)");
-        $stm->execute([$this->name, $this->email, $this->password]);
+    public function register($name, $email, $password, $confirmPassword){
+        // Check if the email is not empty
+        if(!$email) {
+            echo 'You didn\'t type anything in the email';
+            return;
+        }
+        // Check if password is a match
+        if($password != $confirmPassword){
+            echo ' Password doesn\'t match';
+            return;
+        }
+        // Check if the email exist in the database
+        $stm = $this->con->prepare("SELECT email FROM admin WHERE email = ?");
+        $stm->execute([$email]);
+        if($stm->rowCount() > 0) {
+            echo 'This email already exist';
+            return;
+        }
+        // Check if the email is valid
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            echo 'This is an invalid email address';
+            return;
+        }
+        // Hash the password 
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+        // Inset the name, email, password into the database
+        $stm = $this->con->prepare("INSERT INTO admin(name, email, password) VALUES (?, ?, ?)");
+        $stm->execute([$name, $email, $hashedPassword]);
     }
 }
 
 
 $newAdmin = new Admin();
-$newAdmin->setName($_POST['name']);
-$newAdmin->setEmail($_POST['email']);
-$newAdmin->setPassword($_POST['password']);
+$newAdmin->register($_POST['name'], $_POST['email'], $_POST['password'], $_POST['confirmPassword']);
 
-// if ($newAdmin->register()) {
-//     echo "User registered successfully!";
-// } else {
-//     echo "Error registering user.";
-// }
+

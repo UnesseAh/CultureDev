@@ -3,21 +3,19 @@
 require_once('connection.php');
 
 class SignIn extends Database{
-    private $email;
-    private $password;
-    public function setEmail($email){
-        $this->email = $email;
-    }
-    public function setPassword($password){
-        $this->password = $password;
-    }
-    public function checkAdminInDatabase(){
+    public function checkAdminInDatabase($email, $password){
         try {
             $stm = $this->con->prepare("SELECT * FROM admin WHERE email = ?");
-            $stm->execute([$this->email]);
-            $number = $stm->fetch();
-            if($number){
-                header("location: dashboard.html");
+            $stm->execute([$email]);
+            $admin = $stm->fetch();
+            if($admin){
+                if(password_verify($password, $admin['password'])){
+                    header("location: dashboard.html");
+                }else {
+                    echo 'Invalid Password';
+                }
+            }else {
+                echo 'Invalid email';
             }
         }
         catch(PDOException $e){
@@ -27,6 +25,4 @@ class SignIn extends Database{
 }
 
 $adminLogin = new SignIn();
-$adminLogin->setEmail($_POST['email']);
-$adminLogin->setPassword($_POST['password']);
-$adminLogin->checkAdminInDatabase();
+$adminLogin->checkAdminInDatabase($_POST['email'], $_POST['password']);

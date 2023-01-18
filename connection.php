@@ -18,6 +18,3 @@ class Database {
         $this->con = null;
     }
 }
-
-// $database = new Database();
-// $con = $database->con;
