@@ -58,6 +58,14 @@ p, h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
+.categories-table {
+  width: 500px !important;
+}
+
+.test {
+  color: white !important;
+}
+
 .hidden {
   display: none;
 }/*# sourceMappingURL=main.css.map */
