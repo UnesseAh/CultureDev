@@ -20,27 +20,21 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="col" class="text-center">#1</th>
-                    <th scope="col" class="text-center">Cloud</th>
-                    <th scope="col" class="text-center">
-                    <button type="submit" class="btn btn-info rounded-pill mt-2 mb-2">Update</button>
-                        <button name="deleteProduct" type="submit" class="btn btn-danger mb-2 mt-2 rounded-pill">Delete</button>
-                    </th>
-                </tr>
                 <?php
                 @include('./category.Controller.php');
                 $displayCategories = new Crud();
-                $displayCategories->read("category", "*");
+                $categories = $displayCategories->read("categories", "*");
                 ?>
-                <?php while ($row = mysqli_fetch_assoc($result)) { ?>
-
-                    <th scope="col" class="text-center"><?php echo $row['id']; ?></th>
-                    <th scope="col" class="text-center"><?php echo $row['category']; ?></th>
-                    <th scope="col" class="text-center">
-                        <button type="submit" class="btn btn-info rounded-pill mt-2 mb-2">Update</button>
+                <?php foreach ($categories as $category) {
+                ?>
+                <tr>
+                    <td scope="col" class="text-center"><?php echo $category['id']; ?></td>
+                    <td scope="col" class="text-center"><?php echo $category['category']; ?></td>
+                    <td scope="col" class="text-center">
+                        <button type="submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-primary rounded-pill mt-2 mb-2">Update</button>
                         <button name="deleteProduct" type="submit" class="btn btn-danger mb-2 mt-2 rounded-pill">Delete</button>
-                    </th>
+                    </td>
+                </tr>
                 <?php } ?>
             </tbody>
         </table>
@@ -57,7 +51,7 @@
                 <div class="modal-body">
                 <div>
                     <label for="category" class="form-label fw-bold">Category</label>
-                    <input name="category" type="text" id="title" class="form-control" placeholder="category name"/>
+                    <input name="category" type="text" id="title" class="form-control" placeholder="Category Name"/>
                 </div>
                 </div>
                 <div class="modal-footer">

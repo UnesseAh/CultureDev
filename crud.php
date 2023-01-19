@@ -28,7 +28,8 @@ class Crud extends Database{
         }else{
             $sql = "SELECT $rows FROM $tableName";
         }
-        $stmt = $this->pdo->query($sql);
-        $this->sql = $stmt->fetchAll();
+        $stmt = $this->con->query($sql);
+        $sql = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $sql;
     }
 }
