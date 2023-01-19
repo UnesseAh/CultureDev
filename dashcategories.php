@@ -7,78 +7,62 @@
     <!--//////////////// ASIDE BAR SECTION ///////////////////////-->
     
     <!--////////////////////////// TABLE SECTION //////////////////////////-->
-    <button type="button" class="btn rounded-pill text-light bg-primary" data-bs-toggle="modal"  data-bs-target="#staticBackdrop"><i class="fa-solid fa-plus"></i>Add Category</button>
-    <div class="table-responsive mt-2 categories-table">
+    <div class="col-md-6 mx-auto d-flex justify-content-end">
+        <button type="button" class="btn rounded-pill text-light bg-primary my-3 " data-bs-toggle="modal"  data-bs-target="#staticBackdrop"><i class="fa-solid fa-circle-plus px-1"></i>Add Category</button>
+    </div>
+    <div class="table-responsive mt-2 categories-table col-md-6 mx-auto">
         <table id="myTable" class="table table-dark table-striped table-bordered rounded shadow-sm table-hover">
             <thead>
                 <tr>
+                    <th scope="col" class="text-center">ID</th>
                     <th scope="col" class="text-center">Categories</th>
                     <th scope="col" class="text-center"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
+                    <th scope="col" class="text-center">#1</th>
                     <th scope="col" class="text-center">Cloud</th>
                     <th scope="col" class="text-center">
-                        <button type="submit" class="btn btn-info rounded-pill mt-2 mb-2">Update</button>
+                    <button type="submit" class="btn btn-info rounded-pill mt-2 mb-2">Update</button>
                         <button name="deleteProduct" type="submit" class="btn btn-danger mb-2 mt-2 rounded-pill">Delete</button>
                     </th>
                 </tr>
-                <tr>
-                    <th scope="col" class="text-center">databases</th>
+                <?php
+                @include('./category.Controller.php');
+                $displayCategories = new Crud();
+                $displayCategories->read("category", "*");
+                ?>
+                <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+
+                    <th scope="col" class="text-center"><?php echo $row['id']; ?></th>
+                    <th scope="col" class="text-center"><?php echo $row['category']; ?></th>
                     <th scope="col" class="text-center">
                         <button type="submit" class="btn btn-info rounded-pill mt-2 mb-2">Update</button>
                         <button name="deleteProduct" type="submit" class="btn btn-danger mb-2 mt-2 rounded-pill">Delete</button>
                     </th>
-                </tr>
-                <tr>
-                    <th scope="col" class="text-center">Computer Science</th>
-                    <th scope="col" class="text-center">
-                        <button type="submit" class="btn btn-info rounded-pill mt-2 mb-2">Update</button>
-                        <button name="deleteProduct" type="submit" class="btn btn-danger mb-2 mt-2 rounded-pill">Delete</button>
-                    </th>
-                </tr>
-                <tr>
-                    <th scope="col" class="text-center">Mobile Development</th>
-                    <th scope="col" class="text-center">
-                        <button type="submit" class="btn btn-info rounded-pill mt-2 mb-2">Update</button>
-                        <button name="deleteProduct" type="submit" class="btn btn-danger mb-2 mt-2 rounded-pill">Delete</button>
-                    </th>
-                </tr>
-                <tr>
-                    <th scope="col" class="text-center">Open Source</th>
-                    <th scope="col" class="text-center">
-                        <button type="submit" class="btn btn-info rounded-pill mt-2 mb-2">Update</button>
-                        <button name="deleteProduct" type="submit" class="btn btn-danger mb-2 mt-2 rounded-pill">Delete</button>
-                    </th>
-                </tr>
-                <tr>
-                    <th scope="col" class="text-center">Security</th>
-                    <th scope="col" class="text-center">
-                        <button type="submit" class="btn btn-info rounded-pill mt-2 mb-2">Update</button>
-                        <button name="deleteProduct" type="submit" class="btn btn-danger mb-2 mt-2 rounded-pill">Delete</button>
-                    </th>
-                </tr>
+                <?php } ?>
             </tbody>
         </table>
+    </div>
     <!--//////////////// MODAL STARTS HERE ///////////////////////-->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Article</h1>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Add A New Category</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="../functions/crud.php" method="post" class="form-transparent" enctype="multipart/form-data">
+            <form action="./category.Controller.php" method="post" class="form-transparent" enctype="multipart/form-data">
                 <div class="modal-body">
                 <div>
-                    <label for="title" class="form-label fw-bold">Category</label>
-                    <input name="title" type="text" id="title" class="form-control" placeholder="category name"/>
+                    <label for="category" class="form-label fw-bold">Category</label>
+                    <input name="category" type="text" id="title" class="form-control" placeholder="category name"/>
                 </div>
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" name="addProduct" class="btn btn-primary">ADD</button>
+                <button type="submit" name="addNewCategory" class="btn btn-primary">ADD</button>
                 </div>
             </form>
             </div>

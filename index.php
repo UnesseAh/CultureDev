@@ -7,7 +7,7 @@
         <script src="https://cdn.tailwindcss.com"></script>
         <link rel="stylesheet" href="./sass/main.scss">
         <link rel="shortcut icon" href="./src/img/culturedev.png" type="image/x-icon">
-        <script defer src="./main.js"></script>
+        <script defer src="./src/js/main.js"></script>
         <title>Sign In page</title>
     </head>
 <body>

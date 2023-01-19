@@ -1,13 +1,10 @@
-<nav class="dash-bg w-100 px-3 nav d-flex justify-content-between bg-dark">
-        <div class="d-flex justify-content-evenly align-items-center">
-            <a class="nav-link active ps-0" aria-current="page" href="#" ><i class="fa-thin fa-code"></i>CultureDev</a>
-
-            <button class="btn text-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">+</button>
-
-        </div>
-        
+<nav class="dash-bg w-100 px-3 nav d-flex justify-content-between align-items-center bg-dark border-bottom border-light">
+    <div class="d-flex justify-content-evenly align-items-center">
+        <a class="nav-link active ps-0 fs-4" aria-current="page" href="#">CultureDev</a>
+        <button class="btn text-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i class="fa-solid fa-bars"></i></button>
+    </div>
+    <p class="text-light m-0">Youness Ahasla<i class="fa-solid fa-user px-3"></i></p>
 </nav>
-
 
 <div class="offcanvas offcanvas-start text-bg-dark" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
     <div class="offcanvas-header">
