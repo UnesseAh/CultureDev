@@ -3,7 +3,11 @@
         <a class="nav-link active ps-0 fs-4" aria-current="page" href="#">CultureDev</a>
         <button class="btn text-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i class="fa-solid fa-bars"></i></button>
     </div>
-
+    <div>
+        
+        <a class="btn btn-light" href="../CultureDev/dasharticles.php">Articles</a>
+        <a class="btn btn-light" href="../CultureDev/dashcategories.php">Categories</a>
+    </div>
     <p class="text-light m-0">Youness Ahasla<i class="fa-solid fa-user px-3"></i></p>
 </nav>
 

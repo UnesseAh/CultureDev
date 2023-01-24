@@ -53,7 +53,7 @@
             </div>
             <form action="./category.Controller.php" method="post" class="form-transparent" enctype="multipart/form-data">
                 <div class="modal-body">
-                <input type="text" name="categoryInputId" id='categoryInputId' value="" class="my-3">
+                <input type="hidden" name="categoryInputId" id='categoryInputId' value="" class="my-3">
 
                 <div class="form-floating">
                     <input value="" name="category" type="text" id="categoryModalInput" class="form-control" placeholder="Category Name"/>

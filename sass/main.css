@@ -72,4 +72,38 @@ p, h1, h2, h3, h4, h5, h6 {
 
 .table-articles img {
   width: 20px;
+}
+
+body {
+  height: 100vh;
+}
+
+.container-register {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-container {
+  margin: 0 auto;
+  border-radius: 20px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 410px !important;
+}
+
+.signin {
+  display: flex;
+  flex-direction: column;
+}
+
+.button {
+  cursor: pointer;
+}
+
+.register-and-signin-container {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }/*# sourceMappingURL=main.css.map */

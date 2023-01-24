@@ -10,7 +10,7 @@ class SignIn extends Database{
             $admin = $stm->fetch();
             if($admin){
                 if(password_verify($password, $admin['password'])){
-                    header("location: dashmain.php");
+                    header("location: dasharticles.php");
                 }else {
                     echo 'Invalid Password';
                 }

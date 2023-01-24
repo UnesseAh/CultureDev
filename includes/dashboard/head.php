@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="../../sass/main.css">
     <!-- <script defer src="../../dashcategories.php"></script> -->
     <script src="../../src/js/validation.js"></script>
-    <script src="https://cdn.tiny.cloud/1/pwpx476ishkvo2br9a50p1v88j46q425bc452jxv7vkd8auv/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <!-- data table -->
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">

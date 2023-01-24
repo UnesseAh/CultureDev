@@ -29,5 +29,7 @@ function addNewForm(){
 
 function deleteNewForm(element){
     element.parentNode.remove();
-
 }
+
+
+

@@ -24,7 +24,7 @@
     </div>
     <!--////////////////////////// TABLE SECTION //////////////////////////-->
     <div class="col-md-10 mx-auto d-flex justify-content-end">
-        <button type="button" class="btn rounded-pill text-light bg-primary my-3 " data-bs-toggle="modal"  data-bs-target="#staticBackdrop"><i class="fa-solid fa-circle-plus px-1"></i>Add Article</button>
+        <button type="button" class="btn rounded-pill text-light bg-primary my-3 " data-bs-toggle="modal"  data-bs-target="#staticBackdrop" onclick="clearModal()"><i class="fa-solid fa-circle-plus px-1"></i>Add Article</button>
     </div>
     <div class="table-responsive mt-2 categories-table col-md-10 mx-auto">
     <table id="table" class="table table-dark table-striped table-bordered rounded shadow-sm table-hover table-group-divider table-articles text-light" style="width:100%">
@@ -60,9 +60,17 @@
                     <td scope="col" class="text-center"><img class="w-25" src="./src/img/<?php echo $image ?>"></td>
                     <td scope="col" class="text-center titleText"><?php echo $title ?></td>
                     <td scope="col" class="text-center authorText"><?php echo $author ?></td>
-                    <td scope="col" class="text-center categoryText"><?php echo $category ?></td>
+                    <td scope="col" class="text-center categoryText">
+                        <?php
+                            $displayCategories = new Crud();
+                            $categories = $displayCategories->read("categories", "*");
+                            foreach($categories as $category) {
+                                if($article['category_id'] == $category['id']) echo $category['category'];
+                            }
+                        ?>
+                    </td>
                     <td scope="col" class="text-center contentText"><?php echo $content ?></td>
-                    <td>
+                    <td class="d-flex justify-content-evenly">
                         <a name="updateArticle" type="submit" data-bs-toggle="modal"  data-bs-target="#staticBackdrop" class="btn btn-success mb-2 mt-2 rounded-pill" onclick="fillModalOfArticles(<?php echo $article['id']; ?>)">Update</a>
                         <form action="./article.controller.php" method="post">
                             <input type="hidden" name="id" value="<?php echo $article['id'] ?>">
@@ -88,64 +96,44 @@
                         <input type="hidden" name="modalId" id='modalId' value="" class="my-3">
                     </div>
                 <div class="form-floating">
-                    <input value="" name="title" type="text" id="titleInput" class="form-control my-3" placeholder="Title"/>
+                    <input value="" name="title[]" type="text" id="titleInput" class="form-control my-3" placeholder="Title"/>
                     <label for="title" class="form-label">Title</label>
                 </div>
                 <div class="form-floating">
-                    <input value="" name="author" type="text" id="authorInput" class="form-control my-3" placeholder="Writer"/>
+                    <input value="" name="author[]" type="text" id="authorInput" class="form-control my-3" placeholder="Writer"/>
                     <label for="Writer" class="form-label">Writer</label>
                 </div>
-                <select name="category" class="form-select my-3" aria-label="Default select example" id="category" required>
+                <select name="category[]" class="form-select my-3" aria-label="Default select example" id="category" required>
                     <option selected disabled value="">Select Category</option>
-                    <?php $categories = $display->read('categories', '*'); ?>
-                    <?php 
-                    foreach ($categories as $categoryData) {
-                        $categoryId = $categoryData['id'];
-                        $category = $categoryData['category'];
-                        echo '<option value="'.$categoryId.'"> '. $category . '</option>';
-                    }
-                    ?>
+                    <?php shown() ?>
                 </select>
                 <div >
-                    <textarea value="" class="my-3" name="content" name="" id="contentInput" cols="30" rows="10">
-                        
+                    <textarea value="" class="my-3 w-100" name="content[]" id="contentInput" cols="30" rows="10">
                     </textarea>
                 </div>
                 <div>
-                    <input name="image" type="file" id="image" class="form-control my-3" accept=".jpg, .png, .jpeg, .webp"/>
+                    <input name="image[]" type="file" id="image" class="form-control my-3" accept=".jpg, .png, .jpeg, .webp"/>
+                </div>
+                <div id="container-Form">
                 </div>
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" name="addNewArticle" class="btn btn-primary">Add</button>
-                <button type="submit" name="editArticle" class="btn btn-warning">Update</button>
+                <button type="button" id="plusButton" onclick="AddNewFormAr(`<?php shown();?>`)" class="btn btn-primary">+</button>
+                <button type="submit" id="addButton" name="addNewArticle" class="btn btn-primary">Add</button>
+                <button type="submit" id="updateButton" name="editArticle" class="btn btn-warning">Update</button>
                 </div>
             </form>
             </div>
         </div>
         </div>
       <!--//////////////// MODAL ENDS HERE ///////////////////////-->
-      <script>
-        editorStart();
-    function editorStart(){
-        tinymce.init({
-        selector: 'textarea',
-        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
-        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-        tinycomments_mode: 'embedded',
-        tinycomments_author: 'Author name',
-        mergetags_list: [
-            { value: 'First.Name', title: 'First Name' },
-            { value: 'Email', title: 'Email' },
-        ],
-        });
-    }
-      </script>
-      <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="./src/js/formar.js"></script>
     <script src="./src/js/form.js"></script>
     <script src="./src/js/datatable.js"></script>
 </body>

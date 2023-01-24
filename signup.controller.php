@@ -24,6 +24,7 @@ class Admin extends Database {
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
         $stm = $this->con->prepare("INSERT INTO admin(name, email, password) VALUES (?, ?, ?)");
         $stm->execute([$name, $email, $hashedPassword]);
+        header('location: ./index.php');
     }
 }
 

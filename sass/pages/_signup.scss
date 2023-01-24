@@ -1,0 +1,28 @@
+body {
+    height: 100vh;
+}
+
+.container-register {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.register-container {
+    margin: 0 auto;
+    border-radius: 20px;
+    height: fit-content;
+    width: 410px!important;
+}
+
+.signin {
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    cursor: pointer;
+}
+
+.register-and-signin-container {
+    height: fit-content;
+}
