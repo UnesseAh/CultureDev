@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['userId'])){
+        header('location: ./index.php');
+        die;
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <?php @include('./includes/dashboard/head.php') ?>
@@ -71,7 +78,7 @@
                     </td>
                     <td scope="col" class="text-center contentText"><?php echo $content ?></td>
                     <td class="d-flex justify-content-evenly">
-                        <a name="updateArticle" type="submit" data-bs-toggle="modal"  data-bs-target="#staticBackdrop" class="btn btn-success mb-2 mt-2 rounded-pill" onclick="fillModalOfArticles(<?php echo $article['id']; ?>)">Update</a>
+                        <a name="updateArticle" type="submit" data-bs-toggle="modal"  data-bs-target="#staticBackdrop" class="btn btn-success mb-2 mt-2 rounded-pill" onclick="fillModalOfArticles(<?php echo $article['id']; ?>,`<?php echo $article['category_id']; ?>`)">Update</a>
                         <form action="./article.controller.php" method="post">
                             <input type="hidden" name="id" value="<?php echo $article['id'] ?>">
                             <button name="deleteArticle" type="submit" class="btn btn-danger mb-2 mt-2 rounded-pill">Delete</button>
@@ -90,17 +97,17 @@
                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Article</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form id="articles-form" action="./article.controller.php" method="post" class="form-transparent" enctype="multipart/form-data">
+            <form data-parsley-validate id="articles-form" action="./article.controller.php" method="post" class="form-transparent" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div>
-                        <input type="hidden" name="modalId" id='modalId' value="" class="my-3">
+                        <input type="hidden" name="modalId" id='modalId' value="" class="my-3" data-parsley-required data-parsley-trigger="keyup">
                     </div>
                 <div class="form-floating">
-                    <input value="" name="title[]" type="text" id="titleInput" class="form-control my-3" placeholder="Title"/>
+                    <input value="" name="title[]" type="text" id="titleInput" class="form-control my-3" placeholder="Title" data-parsley-trigger="keyup" data-parsley-required/>
                     <label for="title" class="form-label">Title</label>
                 </div>
                 <div class="form-floating">
-                    <input value="" name="author[]" type="text" id="authorInput" class="form-control my-3" placeholder="Writer"/>
+                    <input value="" name="author[]" type="text" id="authorInput" class="form-control my-3" placeholder="Writer" data-parsley-trigger="keyup" data-parsley-required/>
                     <label for="Writer" class="form-label">Writer</label>
                 </div>
                 <select name="category[]" class="form-select my-3" aria-label="Default select example" id="category" required>
@@ -108,11 +115,12 @@
                     <?php shown() ?>
                 </select>
                 <div >
-                    <textarea value="" class="my-3 w-100" name="content[]" id="contentInput" cols="30" rows="10">
+                    <textarea class="my-3 w-100" name="content[]" id="contentInput" cols="30" rows="10">
                     </textarea>
                 </div>
                 <div>
-                    <input name="image[]" type="file" id="image" class="form-control my-3" accept=".jpg, .png, .jpeg, .webp"/>
+                    <input name="image[]" type="file" id="image" class="form-control my-3" accept=".jpg, .png, .jpeg, .webp" data-parsley-trigger="keyup"/>
+                    <input type="hidden" value="<?php  ?>">
                 </div>
                 <div id="container-Form">
                 </div>
@@ -128,6 +136,7 @@
         </div>
         </div>
       <!--//////////////// MODAL ENDS HERE ///////////////////////-->
+    <script defer src="https://parsleyjs.org/dist/parsley.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
@@ -136,5 +145,8 @@
     <script src="./src/js/formar.js"></script>
     <script src="./src/js/form.js"></script>
     <script src="./src/js/datatable.js"></script>
+    <script>
+        $(form).parsley();
+    </script>
 </body>
 </html>

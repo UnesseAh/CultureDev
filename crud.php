@@ -41,7 +41,5 @@ class Crud extends Database{
         $sql = "DELETE FROM $tableName WHERE id = $id";
         $stm = $this->con->prepare($sql);
         $stm->execute();
-        // header('location: dasharticles.php');
-
     }
 }

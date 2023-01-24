@@ -10,6 +10,9 @@ class SignIn extends Database{
             $admin = $stm->fetch();
             if($admin){
                 if(password_verify($password, $admin['password'])){
+                    session_start();
+                    $_SESSION['userId'] = $admin['id'];
+                    $_SESSION['name'] = $admin['name'];
                     header("location: dasharticles.php");
                 }else {
                     echo 'Invalid Password';

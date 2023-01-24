@@ -10,8 +10,9 @@
     <link rel="stylesheet" href="../../sass/main.css">
     <!-- <script defer src="../../dashcategories.php"></script> -->
     <script src="../../src/js/validation.js"></script>
+    <!-- parsley -->
+    <link rel="stylesheet" href="https://parsleyjs.org/src/parsley.css">
     <!-- data table -->
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
     <title>Dashboard</title>

@@ -1,3 +1,12 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['userId'])){
+        header('location: ./index.php');
+        die;
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <?php @include('./includes/dashboard/head.php') ?>
@@ -8,7 +17,7 @@
     
     <!--////////////////////////// TABLE SECTION //////////////////////////-->
     <div class="col-md-6 mx-auto d-flex justify-content-end">
-        <button type="button" class="btn rounded-pill text-light bg-primary my-3 " data-bs-toggle="modal"  data-bs-target="#staticBackdrop"><i class="fa-solid fa-circle-plus px-1"></i>Add Category</button>
+        <button type="button" class="btn rounded-pill text-light bg-primary my-3 " data-bs-toggle="modal"  data-bs-target="#staticBackdrop" onclick="resetCategoryForm()"><i class="fa-solid fa-circle-plus px-1"></i>Add Category</button>
     </div>
     <div class="table-responsive mt-2 categories-table col-md-6 mx-auto">
         <table id="table" class="table  table-striped table-bordered rounded shadow-sm table-hover">
@@ -51,24 +60,21 @@
                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Add New Category</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="./category.Controller.php" method="post" class="form-transparent" enctype="multipart/form-data">
+            <form id="categoryForm" action="./category.Controller.php" method="post" class="form-transparent" enctype="multipart/form-data">
                 <div class="modal-body">
                 <input type="hidden" name="categoryInputId" id='categoryInputId' value="" class="my-3">
 
                 <div class="form-floating">
                     <input value="" name="category" type="text" id="categoryModalInput" class="form-control" placeholder="Category Name"/>
                     <label for="category" class="form-label">Category</label>
-                    <button type="button" onclick="addNewForm()">Add</button>
+                    <!-- <button type="button" onclick="addNewForm()">Add</button> -->
                 </div>
-                <div id="cnct">
-
+                <div id="cnct"></div>
                 </div>
-                </div>
-               
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" name="editCategory" class="btn btn-warning">Update</button>
-                <button type="submit" name="addNewCategory" class="btn btn-primary">ADD</button>
+                <button id="updateCategoryButton" type="submit" name="editCategory" class="btn btn-warning">Update</button>
+                <button id="addCategoryButton" type="submit" name="addNewCategory" class="btn btn-primary">ADD</button>
                 </div>
             </form>
             </div>
