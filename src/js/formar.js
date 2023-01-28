@@ -1,6 +1,5 @@
 function AddNewFormAr(item){
     
-    // alert(document.getElementById('#container-Form').innerHTML());
     document.getElementById('container-Form').innerHTML += `<div> <div class="form-floating">
     <input value="" name="title[]" type="text" id="titleInput" class="form-control my-3" placeholder="Title"/>
     <label for="title" class="form-label">Title</label>
@@ -22,10 +21,8 @@ function AddNewFormAr(item){
     </div>
     </div>
     `;
-    }
-    
-    
-    
+}
+
 
 function clearModal(){
     document.querySelector('#articles-form').reset();

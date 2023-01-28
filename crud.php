@@ -1,12 +1,13 @@
 <?php
 
+
 require_once('connection.php');
 
 class Crud extends Database{
     public function create($tableName, $data=array()){
-        print_r($data);
-        $tableColumns = implode(',', array_keys($data));
+        $tableColumns = implode(',', array_keys($data)); 
         $tableValue = implode("','", $data);
+        var_dump($tableColumns);
         $stm = $this->con->prepare("INSERT INTO $tableName ($tableColumns) VALUES ('$tableValue')");
         $stm->execute();
     }
@@ -19,11 +20,11 @@ class Crud extends Database{
         }
         $stmt = $this->con->query($sql);
         $sql = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        "DELETE FROM $tableName";
         return $sql;
     }
 
     public function update($tableName, $data=array(), $id){
-        var_dump($tableName, $data, $id);
         $set = '';
         $args = array();
         foreach ($data as $column => $value) {

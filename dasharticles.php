@@ -5,6 +5,9 @@
         die;
     }
 ?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <?php @include('./includes/dashboard/head.php') ?>
@@ -12,19 +15,19 @@
     <!--//////////////// Navigation Section /////////////////////// -->
     <?php @include('./includes/dashboard/navbar.php') ?>
     
-    <div class="col-md-10 mx-auto d-flex justify-content-between py-4 ">
-        <div class="stats-cards rounded w-25 p-3 d-flex flex-column align-items-center bg-dark text-light">
+    <div class="container col-md-10 mx-auto row">
+        <div class="col-md col-12 mx-1 my-2 stats-cards rounded p-3 d-flex flex-column align-items-center bg-dark text-light">
             <?php include('./stats.controller.php');
             $displayStats = new getStatistics();
             ?>
             <p>Total Number of Articles</p>
             <p><?php echo $displayStats->getTotalArticles()?></p>
         </div>
-        <div class="stats-cards rounded w-25 p-3 d-flex flex-column align-items-center bg-dark text-light">
+        <div class="col-md col-12 mx-1 my-2 stats-cards rounded p-3 d-flex flex-column align-items-center bg-dark text-light">
             <p>Total Number of Categories</p>
             <p><?php echo $displayStats->getTotalCategories()?></p>
         </div>
-        <div class="stats-cards rounded w-25 p-3 d-flex flex-column align-items-center bg-dark text-light">
+        <div class="col-md col-12 mx-1 my-2 stats-cards rounded p-3 d-flex flex-column align-items-center bg-dark text-light">
             <p>Total Number of Devs</p>
             <p><?php echo $displayStats->getUniqueAuthors()?></p>
         </div>
@@ -77,11 +80,11 @@
                         ?>
                     </td>
                     <td scope="col" class="text-center contentText"><?php echo $content ?></td>
-                    <td class="d-flex justify-content-evenly">
+                    <td class="d-flex justify-content-evenly p-4">
                         <a name="updateArticle" type="submit" data-bs-toggle="modal"  data-bs-target="#staticBackdrop" class="btn btn-success mb-2 mt-2 rounded-pill" onclick="fillModalOfArticles(<?php echo $article['id']; ?>,`<?php echo $article['category_id']; ?>`)">Update</a>
                         <form action="./article.controller.php" method="post">
                             <input type="hidden" name="id" value="<?php echo $article['id'] ?>">
-                            <button name="deleteArticle" type="submit" class="btn btn-danger mb-2 mt-2 rounded-pill">Delete</button>
+                            <button name="deleteArticle" type="submit" class="btn btn-danger mb-2 mt-2 rounded-pill ms-2">Delete</button>
                         </form>
                     </td>
                 </tr>

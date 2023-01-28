@@ -12,7 +12,7 @@ class SignIn extends Database{
                 if(password_verify($password, $admin['password'])){
                     session_start();
                     $_SESSION['userId'] = $admin['id'];
-                    $_SESSION['name'] = $admin['name'];
+                    $_SESSION['username'] = $admin['name'];
                     header("location: dasharticles.php");
                 }else {
                     echo 'Invalid Password';

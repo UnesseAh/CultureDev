@@ -10,6 +10,7 @@ if(isset($_POST['addNewArticle'])){
         $author = $_POST['author'][$i];
         $category = $_POST['category'][$i];
         $content = $_POST['content'][$i];
+
         $image = $_FILES['image']['name'][$i];
         $image_temp = $_FILES['image']['tmp_name'][$i];
         $upload_dir = './src/img/';
@@ -37,20 +38,11 @@ if(isset($_POST['editArticle'])){
         $upload_dir = './src/img/';
         $upload_file = $upload_dir . $image;
         move_uploaded_file($image_temp, $upload_file);
-        // var_dump($image);
 
-        if(empty($image)){
-
-            $editArticle = new Crud();
-            $editArticle->update('articles', ['title'=>$title,'author'=>$author, 'category_id'=>$category, 'body'=>$content], $id);
-            header('location: ./dasharticles.php');
-
-        }else {
-            $editArticle = new Crud();
-            $editArticle->update('articles', ['title'=>$title,'author'=>$author, 'image'=>$image, 'category_id'=>$category, 'body'=>$content], $id);
-            header('location: ./dasharticles.php');
-        }
-
+        $editArticle = new Crud();
+        
+        $editArticle->update('articles', ['title'=>$title,'author'=>$author, 'image'=>$image, 'category_id'=>$category, 'body'=>$content], $id);
+        header('location: ./dasharticles.php');
     }
     // 
 }
@@ -67,8 +59,7 @@ if(isset($_POST['deleteArticle'])){
 
 function shown(){
     $display = new Crud();
-
-     $categories = $display->read('categories', '*');
+    $categories = $display->read('categories', '*');
 
     foreach ($categories as $categoryData) {
         $categoryId = $categoryData['id'];

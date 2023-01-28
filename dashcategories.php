@@ -69,7 +69,6 @@
                     <label for="category" class="form-label">Category</label>
                     <!-- <button type="button" onclick="addNewForm()">Add</button> -->
                 </div>
-                <div id="cnct"></div>
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
